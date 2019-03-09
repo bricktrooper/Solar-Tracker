@@ -35,7 +35,7 @@ void setup()
 	topServo.write(topServoAngle);
 	bottomServo.write(bottomServoAngle);
 
-	delay(2000);
+	delay(1000);
 
 //	topServo.write(69);
 //	bottomServo.write(0);
@@ -53,14 +53,6 @@ void setup()
 	// 	bottomServo.write(0);
 	// 	delay(1000);
 	// }
-
-	for (topServoAngle = 180; topServoAngle > 69.0; topServoAngle -= 10) {
-		topServo.write(topServoAngle);
-		bottomServo.write(180);
-		delay(1000);
-		bottomServo.write(0);
-		delay(1000);
-	}
 
 	Serial.begin(9600);
 }
@@ -107,7 +99,7 @@ void loop()
 				bottomServo.write(bottomServoAngle);
 			}
 			
-			delay(1000);
+			delay(750);
 		}
 		else if (topServoAngle > 69)
 		{
@@ -136,15 +128,6 @@ void loop()
 	{
 		if(bottomServoAngle < 180)
 		{
-<<<<<<< HEAD
-            bottomServoAngle -= 1;
-        }        
-		bottomServo.write(bottomServoAngle);
-    }
-
-	delay(10);
-
-=======
 			bottomServoAngle += 1;
    		    bottomServo.write(bottomServoAngle);  
 		}
@@ -158,8 +141,7 @@ void loop()
 		}
 	}
   
-	delay(25);
->>>>>>> 6e340e8bdbc5a957717e17585cad0279b468c687
+	delay(15);
 }
 
 void updateDiodeValues()

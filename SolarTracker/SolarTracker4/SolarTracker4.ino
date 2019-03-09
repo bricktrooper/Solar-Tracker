@@ -24,17 +24,17 @@ double precision;
 void setup()
 {
 	loopCounter = 0;
+
 	precision = 5;
 
-    topServo.attach(9);
-	bottomServo.attach(10);
-
   	topServoAngle = 180;
-	bottomServoAngle = 170;
+	bottomServoAngle = 10;
+
+	topServo.attach(9);
+	bottomServo.attach(10);
 
 	topServo.write(topServoAngle);
 	bottomServo.write(bottomServoAngle);
-
 	delay(2000);
 
 //	topServo.write(69);
@@ -54,39 +54,31 @@ void setup()
 	// 	delay(1000);
 	// }
 
-	for (topServoAngle = 180; topServoAngle > 69.0; topServoAngle -= 10) {
-		topServo.write(topServoAngle);
-		bottomServo.write(180);
-		delay(1000);
-		bottomServo.write(0);
-		delay(1000);
-	}
-
 	Serial.begin(9600);
 }
 
 void loop()
 {
 	updateDiodeValues();
-    updateServoAngles();
 	
-	// loopCounter += 1;
+	loopCounter += 1;
 
-	// if (loopCounter % 1 == 0) {
-	// 	Serial.print(diode1);
-	// 	Serial.print(" "); 
-	// 	Serial.print(diode2); 
-	// 	Serial.print(" "); 
-	// 	Serial.print(diode3); 
-	// 	Serial.println(" ");
-	// 	Serial.print(topServo.read());
-	// 	Serial.println(" ");
-	// 	Serial.print(bottomServo.read());
-	// }
+	if (loopCounter % 1 == 0) {
+		Serial.print(diode1);
+		Serial.print(" "); 
+		Serial.print(diode2); 
+		Serial.print(" "); 
+		Serial.print(diode3); 
+		Serial.println(" ");
+		Serial.print(topServo.read());
+		Serial.println(" ");
+		Serial.print(bottomServo.read());
+	}
 	
 	diff12 = diode1 - diode2;
 	diff13 = diode1 - diode3;
 	diff23 = diode2 - diode3;
+
 
 	if (abs(diff13) < precision && abs(diff23) < precision)
 	{
@@ -124,42 +116,29 @@ void loop()
 		}        
 	}
 	
-    // TURN //
-
-    updateServoAngles();
-
-	if (abs(diff12) < precision)
-	{
-		bottomServo.write(bottomServoAngle);
-	}
-	else if (diff12 > precision) 
-	{
-		if(bottomServoAngle < 180)
-		{
-<<<<<<< HEAD
-            bottomServoAngle -= 1;
-        }        
-		bottomServo.write(bottomServoAngle);
-    }
-
-	delay(10);
-
-=======
-			bottomServoAngle += 1;
-   		    bottomServo.write(bottomServoAngle);  
-		}
-	}
-	else if (diff12 < -precision)
-	{
-		if (bottomServoAngle > 0)
-		{
-			bottomServoAngle -= 1;
-			bottomServo.write(bottomServoAngle);
-		}
-	}
+	
+//	if (abs(diff12) < precision)
+//	{
+//		bottomServo.write(bottomServoAngle);
+//	}
+//	else if (diff12 > precision) 
+//	{
+//		if(bottomServoAngle < 180)
+//		{
+//			bottomServoAngle += 1;
+//    		bottomServo.write(bottomServoAngle);  
+//		}
+//	}
+//	else if (diff12 < -precision)
+//	{
+//		if (bottomServoAngle > 0)
+//		{
+//			bottomServoAngle -= 1;
+//			bottomServo.write(bottomServoAngle);
+//		}
+//	}
   
-	delay(25);
->>>>>>> 6e340e8bdbc5a957717e17585cad0279b468c687
+	delay(10);
 }
 
 void updateDiodeValues()
@@ -169,11 +148,6 @@ void updateDiodeValues()
 	diode3 = analogRead(DIODE3);
 }
 
-void updateServoAngles()
-{
-    topServoAngle = topServo.read();
-    bottomServoAngle = bottomServo.read();
-}
 // int compareDiodeTheta(double precision)
 // { 
 // 	if (abs(diode1 - diode2) < precision) 
