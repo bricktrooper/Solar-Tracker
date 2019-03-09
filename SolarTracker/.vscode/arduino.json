@@ -1,5 +1,0 @@
-{
-    "port": "/dev/cu.usbmodem1421",
-    "board": "arduino:avr:uno",
-    "sketch": "SolarTracker2/SolarTracker2.ino"
-}
